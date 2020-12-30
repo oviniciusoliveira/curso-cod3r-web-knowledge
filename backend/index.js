@@ -1,16 +1,17 @@
-const express = require('express')
-const app = express()
-const consign = require('consign')
-const db = require('./config/db')
+const express = require("express");
+const app = express();
+const consign = require("consign");
+const db = require("./config/db");
 
-app.db = db
+app.db = db;
 
-consign()   
-    .then('./api')
-    .then('./config/middlewares.js')
-    .then('./config/routes.js')
-    .into(app)
+consign()
+  .then("./api/validator.js")
+  .then("./api")
+  .then("./config/middlewares.js")
+  .then("./config/routes.js")
+  .into(app);
 
 app.listen(3000, () => {
-    console.log('Backend executando...')
-})
+  console.log("Backend executando...");
+});
