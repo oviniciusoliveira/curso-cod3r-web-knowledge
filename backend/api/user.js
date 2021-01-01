@@ -33,27 +33,41 @@ module.exports = (app) => {
     user.password = encryptPassword(req.body.password);
     delete user.confirmPassword;
 
-    if(user.id) {
-      app.db('users')
+    if (user.id) {
+      app
+        .db("users")
         .update(user)
-        .where({ id: user.id})
-        .then(_ => res.status(204).send())
-        .catch(err => res.status(500).send(err))
+        .where({ id: user.id })
+        .then((_) => res.status(204).send())
+        .catch((err) => res.status(500).send(err));
     } else {
-      app.db('users')
+      app
+        .db("users")
         .insert(user)
-        .then(_ => res.status(204).send())
-        .catch(err => res.status(500).send(err))
+        .then((_) => res.status(204).send())
+        .catch((err) => res.status(500).send(err));
     }
-
   };
 
   const get = (req, res) => {
-    app.db('users')
-      .select('id', 'name', 'email', 'admin')
-      .then(users => res.json(users))　// caso precisar remapear os nomes das colunas, poderia utilizar map
-      .catch(err => res.status(500).send(err))
-  }
+    app
+      .db("users")
+      .select("id", "name", "email", "admin")
+      .then((users) => res.json(users)) // caso precisar remapear os nomes das colunas, poderia utilizar map
+      .catch((err) => res.status(500).send(err));
+  };
 
-  return { save, get };
+  const getById = (req, res) => {
+    const user = { ...req.body };
+
+    app
+      .db("users")
+      .select("id", "name", "email", "admin")
+      .first()
+      .where({ id: req.params.id })
+      .then((user) => res.json(user))
+      .catch((err) => res.status(500).send(err));
+  };
+
+  return { save, get, getById };
 };
