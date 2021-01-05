@@ -64,7 +64,7 @@ module.exports = (app) => {
     };
 
     const categoriesWithPath = categories.map((category) => {
-      console.log(categories);
+      // console.log(categories);
       let path = category.name;
       let parent = getParent(categories, category.parentId);
 

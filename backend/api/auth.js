@@ -24,7 +24,7 @@ module.exports = (app) => {
       admin: user.admin,
       /* issued at */
       iat: now,
-      exp: now + 60 * 60 * 24 * 1,
+      exp: now + 60 * 60 * 24 * 1,  
     };
 
     res.json({
