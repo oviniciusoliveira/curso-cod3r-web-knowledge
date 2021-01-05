@@ -6,4 +6,4 @@ module.exports = middleware => {
             res.status(401).send('Usuário não é administrador.')
         }
     }
-}
+}   
