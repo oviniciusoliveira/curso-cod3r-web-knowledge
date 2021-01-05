@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const uri = "mongodb://localhost/knowledge_stats";
-// mongoose.set("useUnifiedTopology", true);
+mongoose.set("useUnifiedTopology", true);
 
 mongoose
   .connect(uri, {

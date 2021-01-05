@@ -10,7 +10,7 @@ module.exports = (app) => {
   };
 
   const strategy = new Strategy(params, (payload, done) => {
-    console.log(payload);
+    //console.log(payload);
     app
       .db("users")
       .where({ id: payload.id })

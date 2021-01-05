@@ -13,6 +13,7 @@ consign()
   .include("./config/passport.js")
   .then("./api/validator.js")
   .then("./api")
+  .then("./schedule")
   .then("./config/middlewares.js")
   .then("./config/routes.js")
   .into(app);
