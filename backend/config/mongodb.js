@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const uri = "mongodb://localhost/knowledge_stats";
+const { uri } = require('../.env');
 mongoose.set("useUnifiedTopology", true);
 
 mongoose
