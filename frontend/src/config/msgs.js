@@ -14,6 +14,6 @@ Vue.toasted.register(
 
 Vue.toasted.register(
   "defaultError",
-  (payload) => (!payload.message ? "Oops. Erro inesperado." : payload.msg),
+  (payload) => (!payload.message ? "Oops. Erro inesperado." : payload.message),
   { type: "error", icon: "times" }
 );
