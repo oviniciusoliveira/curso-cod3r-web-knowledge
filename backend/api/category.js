@@ -2,7 +2,11 @@ module.exports = (app) => {
   const { existsOrError, notExistsOrError } = app.api.validator;
 
   const save = async (req, res) => {
-    const category = { ...req.body };
+    const category = { 
+      id: req.body.id,
+      name: req.body.name,
+      parentId: req.body.parentId
+    };
     if (req.params.id) category.id = req.params.id;
 
     try {
@@ -47,7 +51,7 @@ module.exports = (app) => {
         .db("categories")
         .where({ id: req.params.id })
         .del();
-      console.log(rowsDeleted);
+      // console.log(rowsDeleted);
 
       existsOrError(rowsDeleted, "Categoria não foi encontrada");
 

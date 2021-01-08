@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-      <PageTitle icon="fa fa-home" main="Dashboard" sub="Estatísticas" />
+      <PageTitle icon="fa fa-home" main="Painel de Controle" sub="Estatísticas" />
       <div class="stats">
         <Stat title="Categorias" :value="stat.categories" icon="fa fa-folder" color="#d53d50" />
         <Stat title="Artigos" :value="stat.articles" icon="fa fa-file" color="#3bc480" />
@@ -26,7 +26,6 @@ export default {
   methods: {
     getStats() {
       axios.get(`${baseApiUrl}/stats`).then((res) => {
-        console.log(res)
         this.stat = res.data;
       });
     },
