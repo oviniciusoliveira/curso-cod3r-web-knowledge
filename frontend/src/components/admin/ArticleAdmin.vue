@@ -1,6 +1,6 @@
 <template>
   <div class="article-admin">
-    <b-form>
+     <b-form>
       <input id="article-id" type="hidden" v-model="article.id" />
       <b-form-group label="Nome: " label-for="article-name">
         <b-form-input
@@ -22,7 +22,11 @@
           placeholder="Informe a descrição do artigo..."
         />
       </b-form-group>
-      <b-form-group v-if="mode === 'save'" label="Imagem (URL): " label-for="article-imageUrl">
+      <b-form-group
+        v-if="mode === 'save'"
+        label="Imagem (URL): "
+        label-for="article-imageUrl"
+      >
         <b-form-input
           id="article-imageUrl"
           type="text"
@@ -32,7 +36,11 @@
         />
       </b-form-group>
 
-      <b-form-group v-if="mode === 'save'" label="Categoria:" label-for="article-categoryId">
+      <b-form-group
+        v-if="mode === 'save'"
+        label="Categoria:"
+        label-for="article-categoryId"
+      >
         <b-form-select
           id="article-categoryId"
           :options="categories"
@@ -41,19 +49,27 @@
         />
       </b-form-group>
 
-      <b-form-group v-if="mode === 'save'" label="Autor:" label-for="article-userId">
-        <b-form-select 
+      <b-form-group
+        v-if="mode === 'save'"
+        label="Autor:"
+        label-for="article-userId"
+      >
+        <b-form-select
           id="article-userId"
           :options="users"
           v-model="article.userId"
         />
       </b-form-group>
 
-      <b-form-group v-if="mode === 'save'" label="Conteúdo:" label-for="article-content">
-        <VueEditor
+      <b-form-group
+        v-if="mode === 'save'"
+        label="Conteúdo:"
+        label-for="article-content"
+      >
+         <VueEditor
           v-model="article.content"
           placeholder="Informe o Conteúdo do Artigo..."
-        />
+        /> 
       </b-form-group>
 
       <b-button variant="primary" v-if="mode === 'save'" @click="save"
@@ -79,6 +95,12 @@
         </b-button>
       </template>
     </b-table>
+    <b-pagination
+      size="md"
+      v-model="page"
+      :total-rows="count"
+      :per-page="limit"
+    /> 
   </div>
 </template>
 
@@ -89,7 +111,7 @@ import { baseApiUrl, showError } from "@/global";
 export default {
   name: "ArticleAdmin",
   components: { VueEditor },
-  data: function() {
+  data: function () {
     return {
       mode: "save",
       article: {},
@@ -98,6 +120,7 @@ export default {
       users: [],
       count: 0,
       limit: 0,
+      page: 1,
       fields: [
         { key: "id", label: "Código", sortable: true },
         { key: "name", label: "Nome", sortable: true },
@@ -115,7 +138,7 @@ export default {
         .then((res) => (this.article = res.data));
     },
     loadArticles() {
-      const url = `${baseApiUrl}/articles`;
+      const url = `${baseApiUrl}/articles?page=${this.page}`;
       axios
         .get(url)
         .then((res) => {
@@ -170,6 +193,11 @@ export default {
         })
         .catch(showError);
     },
+  },
+  watch: {
+      page() {
+          this.loadArticles()
+      }
   },
   mounted() {
     this.loadUsers();
