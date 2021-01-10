@@ -1,6 +1,6 @@
 <template>
   <div class="article-admin">
-     <b-form>
+    <b-form>
       <input id="article-id" type="hidden" v-model="article.id" />
       <b-form-group label="Nome: " label-for="article-name">
         <b-form-input
@@ -66,10 +66,10 @@
         label="Conteúdo:"
         label-for="article-content"
       >
-         <VueEditor
+        <VueEditor
           v-model="article.content"
           placeholder="Informe o Conteúdo do Artigo..."
-        /> 
+        />
       </b-form-group>
 
       <b-button variant="primary" v-if="mode === 'save'" @click="save"
@@ -100,18 +100,19 @@
       v-model="page"
       :total-rows="count"
       :per-page="limit"
-    /> 
+    />
   </div>
 </template>
 
 <script>
 import axios from "axios";
 import { VueEditor } from "vue2-editor";
-import { baseApiUrl, showError } from "@/global";
+import { baseApiUrl, showError } from "@/global"; 
+
 export default {
   name: "ArticleAdmin",
   components: { VueEditor },
-  data: function () {
+  data: function() {
     return {
       mode: "save",
       article: {},
@@ -195,9 +196,9 @@ export default {
     },
   },
   watch: {
-      page() {
-          this.loadArticles()
-      }
+    page() {
+      this.loadArticles();
+    },
   },
   mounted() {
     this.loadUsers();

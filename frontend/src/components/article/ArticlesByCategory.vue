@@ -28,7 +28,7 @@ import ArticleItem from "./ArticleItem";
 export default {
   name: "ArticlesByCategory",
   components: { PageTitle, ArticleItem },
-  data: function () {
+  data: function() {
     return {
       category: {},
       articles: [],
@@ -43,12 +43,25 @@ export default {
       axios.get(url).then((res) => (this.category = res.data));
     },
     getArticles() {
-      const url = `${baseApiUrl}/categories/${this.category.id}/articles?page=${this.page}`;
+      const url = `${baseApiUrl}/categories/${this.category.id}/articles?page=${
+        this.page
+      }`;
       axios.get(url).then((res) => {
         this.articles = this.articles.concat(res.data.data);
         this.page++;
         if (this.articles.length === res.data.count) this.loadMore = false;
       });
+    },
+  },
+  watch: {
+    $route(to) {
+      this.category.id = to.params.id;
+      this.articles = [];
+      this.page = 1;
+      this.loadMore = true;
+
+      this.getCategory();
+      this.getArticles();
     },
   },
   mounted() {
