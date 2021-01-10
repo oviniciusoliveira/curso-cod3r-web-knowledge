@@ -50,8 +50,8 @@ module.exports = (app) => {
     }
   };
 
-  const limit = 2;
   const get = async (req, res) => {
+    const limit = 10;
     const page = req.query.page || 1;
 
     const result = await app.db("articles").count("id").first();
@@ -80,6 +80,7 @@ module.exports = (app) => {
   };
 
   const getByCategory = async (req, res) => {
+    const limit = 5;
     const categoryId = req.params.id;
     const page = req.query.page || 1;
     const categories = await app.db.raw(
@@ -87,6 +88,9 @@ module.exports = (app) => {
       categoryId
     );
     const ids = categories.rows.map((c) => c.id);
+
+    const result = await app.db("articles").whereIn("categoryId", ids).count("id").first();
+    const count = parseInt(result.count)
 
     app
       .db({ a: "articles", u: "users" })
@@ -98,7 +102,7 @@ module.exports = (app) => {
       .whereRaw("?? = ??", ["u.id", "a.userId"])
       .whereIn("categoryId", ids)
       .orderBy("a.id", "desc")
-      .then((articles) => res.json(articles))
+      .then((articles) => res.json({data: articles, count}))
       .catch((err) => res.status(500).send(err));
   };
 

@@ -5,7 +5,7 @@ mongoose.set("useUnifiedTopology", true);
 mongoose
   .connect(uri, {
     useNewUrlParser: true,
-    // useUnifiedTopolog    y: true,
+    // useUnifiedTopology: true,
   })
   .catch((e) => {
     /* Node Console.Log Callers */
