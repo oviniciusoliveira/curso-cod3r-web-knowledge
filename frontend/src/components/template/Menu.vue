@@ -68,8 +68,12 @@ export default {
 
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
+  flex-wrap: wrap;  
 }
+.tree {
+  max-width: 300px;
+}
+
 
 .menu a,
 .menu a:hover {
