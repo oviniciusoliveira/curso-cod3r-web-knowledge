@@ -3,7 +3,7 @@
         <div class="user-button">
             <span class="d-none d-sm-block">{{ user.name }} </span>
             <div class="user-dropdown-img">
-                <Gravatar :email="user.email" alt="User Icon" />
+                <Gravatar :email="user.email" alt="UserIcon" />
             </div>
             <i class="fa fa-angle-down"></i>
         </div>

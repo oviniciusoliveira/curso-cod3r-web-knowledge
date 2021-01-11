@@ -70,10 +70,6 @@ export default {
   flex-direction: column;
   flex-wrap: wrap;  
 }
-.tree {
-  max-width: 300px;
-}
-
 
 .menu a,
 .menu a:hover {
