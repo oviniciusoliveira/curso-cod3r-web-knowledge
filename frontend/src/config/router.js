@@ -7,6 +7,9 @@ import ArticlesByCategory from '@/components/article/ArticlesByCategory'
 import ArticleById from '@/components/article/ArticleById'
 import Auth from '@/components/auth/Auth'
 
+import { baseApiUrl, userKey } from '@/global'
+import axios from 'axios'
+
 Vue.use(VueRouter)
 
 const routes = [{
@@ -16,7 +19,8 @@ const routes = [{
 }, {
     name: 'adminPages',
     path: '/admin',
-    component: AdminPages
+    component: AdminPages,
+    meta: { requiresAdmin: true }
 }, {
     name: 'articlesByCategory',
     path: '/categories/:id/articles',
@@ -34,6 +38,20 @@ const routes = [{
 const router = new VueRouter({
     mode: 'history',
     routes
+})  
+
+router.beforeEach(async (to, from, next) => {
+
+    const json = localStorage.getItem(userKey)
+
+    if(to.matched.some(record => record.meta.requiresAdmin)) {
+        const user = JSON.parse(json)
+        const admin = await axios.post(`${baseApiUrl}/validateAdmin`, user)
+        user && admin.data ? next() : next({ path: '/ '})
+    } else { 
+        next()
+    }
 })
+
 
 export default router
