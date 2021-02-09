@@ -94,7 +94,8 @@ export default {
 
 .auth-modal button {
   align-self: flex-end;
-  background-color: #2460ae;
+  /* background-color: #2460ae; */
+  background-color: #462d23 ;
   color: #ffffff;
   padding: 5px 15px;
 }

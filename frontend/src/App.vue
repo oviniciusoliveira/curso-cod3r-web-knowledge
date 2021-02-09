@@ -1,6 +1,6 @@
 <template>
 	<div id="app" :class="{'hide-menu': !isMenuVisible || !user}">
-		<Header title="Knowledge" 
+		<Header title="Arbow" 
 			:hideToggle="!user"
 			:hideUserDropdown="!user" />
 		<Menu v-if="user" />
