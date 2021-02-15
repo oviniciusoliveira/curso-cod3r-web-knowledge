@@ -70,7 +70,6 @@ header.header > a.toggle {
   color: #ffffff;
   justify-self: flex-start;
   text-decoration: none;
-
   display: flex;
   justify-content: center;
   align-items: center;
